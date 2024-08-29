@@ -7,11 +7,11 @@ import java.util.Optional;
 class FirstProgram {
     public static void main(String[] args) throws IOException {
         clearScreen();
-        Integer int_number = null;
+        Float int_number = null;
         while (int_number == null) {
             try {
                 String str_number = input(Optional.of("Enter a valid number: "));
-                int_number = toInt(str_number);
+                int_number = toFloat(str_number);
                 clearScreen();
                 System.out.println(int_number);
             } catch (NumberFormatException e) {
@@ -30,12 +30,11 @@ class FirstProgram {
     }
 
     public static int toInt(String string) {
-        try {
-            int number = Integer.valueOf(string);
-            return number;
-        } catch (Exception e) {
-            throw e;
-        }
+        return Integer.parseInt(string);
+    }
+
+    public static float toFloat(String string) {
+        return Float.parseFloat(string);
     }
 
     public static void helloWorld() {
@@ -49,9 +48,7 @@ class FirstProgram {
 
     public static String input(Optional<String> input) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        if (input.isPresent()) {
-            System.out.print(input.get());
-        }
+        input.ifPresent(System.out::print);
         return br.readLine();
     }
 }
